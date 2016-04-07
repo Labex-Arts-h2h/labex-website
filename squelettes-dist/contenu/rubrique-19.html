@@ -1,0 +1,24 @@
+<BOUCLE_contenu_rubrique(RUBRIQUES){id_rubrique}>
+<!-- TITRE RUBRIQUE -->
+<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+<!-- END TITRE RUBRIQUE -->
+
+<!-- DESCRIPTIF RUBRIQUE -->
+<BOUCLE_sous_rubrique(RUBRIQUES){id_parent}{titre=#ENV{lang}}>
+<div class="contenu-principal">
+	<div class="cartouche">
+		<p>#TEXTE</p>
+	</div>
+</div>
+</BOUCLE_sous_rubrique>
+<!-- END DESCRIPTIF RUBRIQUE -->
+
+<!-- LISTE ARTISTES -->
+<INCLURE{fond=inclure/liste-international}{env}{id_secteur}{ajax=liste}/>
+<!-- END LISTE ARTISTES -->
+
+<!-- DATE MAJ -->
+<INCLURE{fond=inclure/date-publication}/>
+<!-- DATE MAJ -->
+
+</BOUCLE_contenu_rubrique>

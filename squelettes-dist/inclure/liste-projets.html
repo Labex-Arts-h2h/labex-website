@@ -1,0 +1,70 @@
+
+#SET{lang,#ENV|get_lang}
+<B_projets>
+<div class="row">
+	<div class='tri-projets'>
+		<ul>
+			<li>#TRI{date,'Trier par date'}</li>
+			<li>#TRI{titre,'Trier par titre'}</li>
+		</ul>
+		<ul class="vues">
+			<li>
+				<a id="vue-simple" href="#">
+					<img alt="vue simple" width="12" src="#CHEMIN{/img/svg/si-glyph-bullet-list-2.svg}"/>
+				</a>
+			</li>
+			<li>
+				<a id="vue-complexe" href="#">
+					
+					<img alt="vue complexe" width="12" src="#CHEMIN{/img/svg/si-glyph-square-four.svg}"/>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="col-md-4" style="float:right;">
+		[(#FORMULAIRE_RECHERCHE|spip.php?page=recherche-projet)]
+	</div>
+
+</div>
+
+<div class="row">
+
+<B_projets>
+<div class='liste-projets liste-projets'>
+	#ANCRE_PAGINATION
+   <BOUCLE_projets(ARTICLES){id_rubrique IN 38,39}{tri date}{id_mot ?}{lang}{pagination 24}>
+   <article class="projet">
+	<BOUCLE_mots(MOTS){id_article}{id_groupe=4}>
+	<div class="tag">#TITRE</div>
+	</BOUCLE_mots>
+    <h3>
+    <a href="#URL_ARTICLE">
+    <B_portfolio_unique>
+      <BOUCLE_portfolio_unique(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{doublons}{0,1}>
+          [(#FICHIER|image_passe_partout{305,160}|image_recadre{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive})]
+      </BOUCLE_portfolio_unique>
+      </B_portfolio_unique>
+      	[(#LOGO_RUBRIQUE|image_passe_partout{305,160}|image_recadre{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive})]
+      <//B_portfolio_unique>
+    #TITRE
+    </a></h3>
+	<p class="descriptif">[(#CHAPO|?{[(#CHAPO|textebrut)], "&nbsp;"})]</p>
+	</article>
+	</BOUCLE_projets>
+</div>
+
+[<div class="wrap-pag">
+	<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>
+</div>]
+
+<!-- DATE MAJ -->
+<INCLURE{fond=inclure/date-publication}/>
+<!-- DATE MAJ -->
+
+</B_projets>
+ 	Aucun Projet.
+<//B_projets>
+
+</div>
+

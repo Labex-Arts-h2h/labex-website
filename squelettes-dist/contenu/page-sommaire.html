@@ -1,0 +1,220 @@
+<div class="row">
+    <div class="col-md-3 descriptif-site">
+        <h1 class="titre-site">
+        <multi>
+        [fr] Le laboratoire d’excellence des arts et médiations humaines
+        [en] The laboratory of excellence in arts and human mediations
+		</multi>
+        </h1>
+        <p>
+		<multi>
+        [fr] Le Labex Arts-H2H explore les nouveaux liens entre les arts, les sciences humaines, les sciences et les techniques, l’espace physique et l’espace des données numériques, les formes artistiques et leur médiation. Les projets qu’il développe, tous collaboratifs et situés au croisement des disciplines, confrontent les corpus, méthodologies et formats scientifiques avec les dispositifs de la création artistique.
+        [en] The Labex Arts-H2H explores new connections between arts, humanities, sciences and techniques, between the physical space and the data space, between artistic forms and their mediation. Its projects are transdisciplinary and collaboratively developed, bringing together corpuses, methodologies and scientific formats with artistic creation.
+		</multi>
+        </p>
+    </div>
+    <!-- UNES - MANCHETTE -->
+    <div class="col-md-9">
+        <div class="row">
+        <div class="col-md-12 nopadding">
+			<BOUCLE_selection(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=2}>
+				<article class="col-md-6 unes nopadding">
+						<div>
+							<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+							<p><a href="#URL_ARTICLE">#CHAPO</a></p>
+						</div>
+					[(#LOGO_ARTICLE_NORMAL|#URL_ARTICLE|image_passe_partout{540,310}|image_recadre{510,310}|inserer_attribut{alt,#TITRE}|inserer_attribut{class,img-responsive})]
+				</article>
+			</BOUCLE_selection>
+         </div>
+        </div>
+    </div><!--/.col-md-9-->
+    <!-- UNES - MANCHETTE -->
+</div><!--/.row-->
+<section class="row actualite">
+	<header class="col-md-12">
+		<h2><a href="#URL_RUBRIQUE{3}"><:actualites:></a></h2>
+	</header>
+	<BOUCLE_breves(pb_selection){par ordre}{id_rubrique=3}{0,4}>
+		<BOUCLE_breves2(ARTICLES){id_article=#ID_ARTICLE}>
+			<BOUCLE_breves2_trad(ARTICLES){traduction}{lang=#LANG}>
+				<article class='col-md-3 col-sm-6'>
+						[(#LOGO_ARTICLE_NORMAL|#URL_ARTICLE|image_passe_partout{250,130}|inserer_attribut{alt,#TITRE}|inserer_attribut{class,img-responsive})]
+					<a href='#URL_ARTICLE'>
+										[<date>(#DATE|affdate)</date>]
+
+						<h3>#TITRE</h3>
+						[<p>(#CHAPO|textebrut)</p>]
+					</a>
+				</article>
+			</BOUCLE_breves2_trad>
+		</BOUCLE_breves2>
+	</BOUCLE_breves>
+</section>
+<section class="row calendar">
+	<header class="col-md-12">
+		<h2><a href="#URL_RUBRIQUE{2}"><:agenda:></a></h2>
+	</header>
+	<div class="col-md-3 hidden-xs hidden-sm">
+		[(#CALENDRIER_MINI{#ENV{date},
+		  date, 
+		  #URL_PAGE{jour},
+		  #URL_PAGE{calendrier_mini_event.json}})]
+	</div>
+ 	
+	<BOUCLE_prochain_evenement(EVENEMENTS){evenement_a_venir}{par date}{0,4}>
+	   <BOUCLE_articles(ARTICLES){id_evenement}>
+	   	<article class="col-md-2">
+	   		<div>
+		   		<date>[(#DATE_DEBUT|affdate_court)]</date>
+		   		<BOUCLE_mots(MOTS){id_evenement}>
+	   				<span>#TITRE</span>
+	   			</BOUCLE_mots>
+				<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+				[<span>(#DATE_DEBUT|heures)h à #LIEU</span>]
+			</div>
+		</article>
+	   </BOUCLE_articles>
+	</BOUCLE_prochain_evenement>
+
+</section>
+<section class="row">
+	#SET{lang,#ENV|get_lang}
+	<BOUCLE_realisations_haute(RUBRIQUES) {id_rubrique=26}>
+		<header class="col-md-12">
+			<h2><a href="#URL_RUBRIQUE ">#TITRE</a></h2>
+		</header>
+	</BOUCLE_realisations_haute>
+	<BOUCLE_realisations(RUBRIQUES) {id_rubrique=41}>
+		<BOUCLE_realisation(ARTICLES){id_rubrique}{0,4}>
+			<BOUCLE_realisation_trad(ARTICLES){traduction}{lang=#GET{lang}}>
+			<article class="col-md-3 col-sm-6">
+							[(#LOGO_ARTICLE_NORMAL|#URL_ARTICLE|inserer_attribut{alt,#TITRE}|inserer_attribut{class,img-responsive})]
+
+				<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+			</article>
+			</BOUCLE_realisation_trad>
+		</BOUCLE_realisation>
+	</BOUCLE_realisations>
+</section>
+
+<div class="row">
+	<div class="col-md-4">
+		<h2><a href="#URL_RUBRIQUE{1}"><:projets:></a></h2>
+		<B_compte>
+		<h4><span class="number blue">#TOTAL_BOUCLE</span> <:projets:></h4>
+			<BOUCLE_compte(ARTICLES){id_rubrique IN 38,39}{tri date}{id_mot ?}{lang}>
+			</BOUCLE_compte>
+		</B_compte>
+			<h4>88 projets</h4>
+		<//B_compte>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+		<h4>Parcourir les projets par thématiques : </h4>
+		<ul>
+			<BOUCLE_thematiques(MOTS) {id_groupe=4} {par num titre, titre}>
+			<li>
+					<a class="ajax #EXPOSE" href="[(#SELF|parametre_url{id_mot, #ID_MOT})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
+			</li>
+			</BOUCLE_thematiques>
+		</ul>
+		<h4>Parcourir les projets par années : </h4>
+		<ul>
+			<BOUCLE_annes(MOTS) {id_groupe=3} {par num titre, titre}>
+				<li>
+					<a class="ajax #EXPOSE" href="[(#SELF|parametre_url{id_mot, #ID_MOT})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
+				</li>
+			</BOUCLE_annes>
+		</ul>
+
+		<h4><a href="#URL_RUBRIQUE{1}">Voir les tout projets <img width="12" src="#CHEMIN{/img/svg/si-glyph-arrow-thin-right.svg}"/></a></h4>
+	</div>
+	<section class="col-md-8 sites">
+		<h2>Derniers actualités des projets</h2>
+		<BOUCLE_sites(SITES){tout}>
+			<BOUCLE_rss(SYNDIC_ARTICLES){id_syndic}{tout}{0,1}>
+			<article class="row">
+				<div class="col-md-10">
+					<span>
+						<a href="#URL_SITE">#NOM_SITE </a>
+					</span>
+					<h4>
+						<a href="#URL_ARTICLE">#TITRE
+							<img width="12" src="#CHEMIN{/img/svg/si-glyph-arrow-forward.svg}"/>
+						</a>
+					</h4>
+					<date>[(#DATE|affdate)]</date>
+				</div>
+				<div class="col-md-2">
+						[(#LOGO_SITE|#URL_ARTICLE|image_passe_partout{60,60}|image_recadre{60,60}|inserer_attribut{alt,#TITRE}|inserer_attribut{class,img-responsive})]
+				</div>
+
+			</article>
+			</BOUCLE_rss>
+		</BOUCLE_sites>
+	</section>
+</div>
+
+<div class="row">
+	<section class="col-md-8">
+		<h2>International</h2>
+		<p> Nous accueillons aussi chaque année plusieurs artistes et chercheurs étrangers dans le cadre d’un programme de chaires internationales et développons une politique de conventionnement avec des universités étrangères (Corée, Italie, Canada etc.). </p>
+		<img src="#CHEMIN{/img/cartographie.png}" alt="cartographie" class="img-responsive"/>
+		<a href="#URL_RUBRIQUE{46}">Vous trouverez ici la liste de nos invités. <img width="12" src="#CHEMIN{/img/svg/si-glyph-arrow-thin-right.svg}"/></a>
+	</section>
+	<section class="col-md-4 young">
+		<h2>Jeunes Chercheurs</h2>
+		<p>
+			<span class="number blue">39</span> doctorants,<br/>
+			<span class="number blue">23</span> post-doctorants ont été financés.
+		</p>
+		<p>
+			<span class="number blue">570</span> doctorants sont inscrits sur un sujet de thèse en relation avec le programme du LABEX.
+		</p>
+		<a href="#URL_RUBRIQUE{62}">Vous trouverez la liste des jeunes chercheurs <img width="12" src="#CHEMIN{/img/svg/si-glyph-arrow-thin-right.svg}"/></a>
+	</section>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+		<h2>A Voir</h2>
+		<h4>Atelier Insectes Solaires</h4>
+		<div class="embed-responsive embed-responsive-16by9">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/sH14yNiqavg?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<a href="http://www.labex-arts-h2h.fr/fr/atelier-insectes-solaires-825.html">Voir l'atelier <img width="12" src="#CHEMIN{/img/svg/si-glyph-arrow-thin-right.svg}"/></a>
+	</div>
+	<section class="col-md-4 newsletter form-style">
+		<h2>Inscription Newsletter</h2>
+		<p>Chaque semaine, retrouvez toutes les actualités du Labex Arts-H2H en vous inscrivant à la newsletter</p>
+		<form>
+		    <div class="group">      
+		      <input type="text" required>
+		      <span class="highlight"></span>
+		      <span class="bar"></span>
+		      <label>E-Mail</label>
+		    </div>
+		    <input type="submit" value="Inscription"></input>
+		</form>
+	</section>
+	<section class="reseaux col-md-4">
+		<h2>Nous Suivre</h2>
+<a class="twitter-timeline" href="https://twitter.com/ArtsH2H" data-widget-id="639736574138281985">Tweets de @ArtsH2H</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</section>
+</div>
+
+<div class="row">
+	<section class="partenaires col-md-12">
+		<h2>Partenaires</h2>
+		<BOUCLE_partenaires(PARTENAIRES){type_id=0}{par date}{logo}>
+			<a href="#URL"><img src='[(#LOGO_PARTENAIRE_SURVOL|extraire_attribut{src})]' alt="#NOM"/></a>
+		</BOUCLE_partenaires>
+	</section>
+</div>
+

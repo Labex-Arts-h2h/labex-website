@@ -1,0 +1,139 @@
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<div class="row agenda">
+	<div class="col-md-6">
+		<h1>#TITRE</h1>
+		<BOUCLE_compte(EVENEMENTS){evenement_a_venir}/>
+		<span class="nbreEvenements">
+			#TOTAL_BOUCLE
+
+		</span>
+		[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:evenements_futurs:>,<:evenements_futurs:>}|sinon{	<:agenda:aucun_evenement:>})]#SET{yena,#TOTAL_BOUCLE|oui}
+		<//B_compte>			
+	</div>
+	<div class="col-md-6" style="text-align:right;">
+
+	<button class="button button-right">
+	<a href="spip.php?page=ical">Souscrire au calendrier</a>
+<!-- 		<img width="12" src="#CHEMIN{/img/svg/si-glyph-square-plus.svg}"/>
+ -->		
+	</button>
+
+	</div>
+</div>
+</BOUCLE_principale>
+
+
+
+<div class="row agenda">
+	<BOUCLE_liste(EVENEMENTS){age_debut<=0}{par date_debut}{fusion YEAR(date_debut)}>			
+		<B_annees>
+			<BOUCLE_annees(EVENEMENTS){age_debut<=0}
+			{par date_debut}{annee_relatif_debut}{fusion MONTH(date_debut)}>	
+				<B_mois>
+					<!-- MOIS -->
+					<B_mois_nbre>
+
+					<BOUCLE_mois_nbre(EVENEMENTS){age_debut<=0}{par date_debut}{mois_relatif_debut}></BOUCLE_mois_nbre>
+					[(#TOTAL_BOUCLE|>{1}|?{'<div class="col-md-12">','<div class="col-md-6">'})]
+					<//B_mois_nbre>
+					<!-- END MOIS -->
+
+					[<h2>(#DATE_DEBUT|affdate_mois_annee)</h2>]
+							<BOUCLE_mois(EVENEMENTS){age_debut<=0}
+							{par date_debut}{mois_relatif_debut}>
+						   	
+						   	[(#TOTAL_BOUCLE|>{1}|?{'<article class="col-md-4">','<article class="col-md-8">'})]
+						   		<date class="col-md-4">
+							   		<span class="nombre">[(#DATE_DEBUT|affdate{'j'})]</span>
+							   		<span class="semaine">
+							   		[(#DATE_DEBUT|nom_jour)]
+							   		</span>
+						   		</date>
+						   		<div class="col-md-8">
+								   	<BOUCLE_mots(MOTS){id_evenement}>
+							   			<span class="type">#TITRE</span>
+							   		</BOUCLE_mots>
+
+							        <BOUCLE_portfolio_unique(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{doublons}{0,1}>
+							            [(#FICHIER|image_passe_partout{305,160}|image_recadre{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive})]
+							        </BOUCLE_portfolio_unique>						   			
+									<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+									[<span>(#DATE_DEBUT|heures)h à #LIEU</span>]
+								</div>
+							</article>
+							</BOUCLE_mois>
+					</div>
+				</B_mois>
+			</BOUCLE_annees>
+		</B_annees>		
+	</BOUCLE_liste>
+</div>
+
+<hr>
+<!-- Bloc agenda -->
+<B_agenda>
+<div class="mgs_menu">
+   <ul class="general">
+       <li class="mgs_menu_titre"><:agenda:></li>
+       <BOUCLE_agenda(EVENEMENTS){age<0}{par date}{statut=publie}{pagination 5}>
+       <li class="mgs_menu_item">
+       - <a href="#URL_ARTICLE" title="#TITRE">[(#TITRE|textebrut|couper{24})]</a><br>
+           [ <small><em>(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})</em></small>]
+       </li>
+       </BOUCLE_agenda>
+       [<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+   </ul>
+</div>
+</B_agenda>
+
+
+<B_liste_ancien>
+<div class="row agenda">
+	#ANCRE_PAGINATION 
+	<h3>Evénements Passés</h3>
+	<BOUCLE_liste_ancien(EVENEMENTS){age_debut>=0}{par date_debut}{inverse}{fusion YEAR(date_debut)}{pagination 2}{0,1}>			
+		<B_annees_ancien>
+			<BOUCLE_annees_ancien(EVENEMENTS){age_debut>=0}
+			{par date_debut}{annee_relatif_debut}{inverse}{fusion MONTH(date_debut)}>	
+				<B_mois_ancien>
+					<!-- MOIS -->
+					<B_mois_nbre_ancien>
+
+					<BOUCLE_mois_nbre_ancien(EVENEMENTS){age_debut>=0}{par date_debut}{mois_relatif_debut}></BOUCLE_mois_nbre_ancien>
+					[(#TOTAL_BOUCLE|>{1}|?{'<div class="col-md-12">','<div class="col-md-12">'})]
+					<//B_mois_nbre_ancien>
+					<!-- END MOIS -->
+
+					[<h2>(#DATE_DEBUT|affdate_mois_annee)</h2>]
+							<BOUCLE_mois_ancien(EVENEMENTS){age_debut>=0}
+							{par date_debut}{mois_relatif_debut}>
+						   	
+						   	[(#TOTAL_BOUCLE|>{1}|?{'<article class="col-md-4">','<article class="col-md-8">'})]
+						   		<date class="col-md-4 old">
+							   		<span class="nombre">[(#DATE_DEBUT|affdate{'j'})]</span>
+							   		<span class="semaine">
+							   		[(#DATE_DEBUT|nom_jour)]
+							   		</span>
+						   		</date>
+						   		<div class="col-md-8">
+								   	<BOUCLE_mots_ancien(MOTS){id_evenement}>
+							   			<span class="type">#TITRE</span>
+							   		</BOUCLE_mots_ancien>
+
+							        <BOUCLE_portfolio_unique_ancien(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{doublons}{0,1}>
+							            [(#FICHIER|image_passe_partout{305,160}|image_recadre{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive})]
+							        </BOUCLE_portfolio_unique_ancien>						   			
+									<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+								</div>
+							</article>
+							</BOUCLE_mois_ancien>
+					</div>
+				</B_mois>
+			</BOUCLE_annees_ancien>
+		</B_annees_ancien>		
+	</BOUCLE_liste_ancien>
+		[<div class="wrap-pag">
+			<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>
+		</div>]
+</div>
+</B_liste_ancien>

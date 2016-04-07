@@ -1,0 +1,78 @@
+<BOUCLE_principale(ARTICLES){id_article}>
+<div class="row realisation">
+
+	<!-- TITRE & DESCRIPTION -->
+	<div class='col-md-3 head blue'>
+		<h1>#TITRE</h1>
+		#DESCRIPTIF
+		#CS_SOMMAIRE
+		<B_partenaires>
+			<p><:partenaires_col:><br/>
+				<BOUCLE_partenaires(PARTENAIRES){id_article}{"<br/>"}>
+				<a href='#URL' target='_blank'>#NOM (#LOCALITE)</a>
+			</BOUCLE_partenaires></p>
+		</B_partenaires>
+	</div>
+	<!-- END TITRE & DESCRIPTION -->
+
+	<div class="col-md-9"><!-- COL-MD-9 -->
+		<div id="diaporama" class="row"><!-- ID DIAPORAMA -->
+			
+				<div class="col-md-4 citation">
+					[(#TEXTE|get_citation_realisation)]
+				</div>
+
+				<!-- VIDEO -->
+				<BOUCLE_video(CONDITION){si #URL_SITE|oui}>
+					<div class='diaporama col-md-8'>
+						<iframe width=537 height=316 src="#URL_SITE" frameborder="0" allowfullscreen></iframe>
+					</div>
+				</BOUCLE_video>
+				<!-- END VIDEO -->
+
+				<!-- DIAPORAMA -->
+				<div class='diaporama col-md-8'>
+					<BOUCLE_diaporama(DOCUMENTS){id_article}{par date}{extension IN "jpg","png"}>
+						<img src='#URL_DOCUMENT' class='img_[(#COMPTEUR_BOUCLE|moins{1})]' [(#COMPTEUR_BOUCLE|=={1}|?{'','style="display:none;"'})]/>
+					</BOUCLE_diaporama>
+
+					<BOUCLE_control(CONDITION){si #_diaporama:TOTAL_BOUCLE|>{1}}>
+					<div class='fleches'>
+						<a class='left' onclick='diaporamaInc(-1);'>&nbsp;</a>
+						<a class='right' onclick='diaporamaInc(1);'>&nbsp;</a>
+					</div>
+					<div class='squares'>
+						<BOUCLE_diaporama2(DOCUMENTS){id_article}{par date}{extension IN "jpg","png"}>
+							<a [(#COMPTEUR_BOUCLE|=={1}|?{'class="selected"',''})] onclick='diaporamaGo([(#COMPTEUR_BOUCLE|moins{1})]);'>&nbsp;</a>
+						</BOUCLE_diaporama2>
+					</div>
+					</BOUCLE_control>
+				</div>
+				<!-- END DIAPORAMA -->
+				</B_diaporama>
+				<div class='empty_diaporama'></div>
+				<//B_diaporama>
+				<//B_video>
+
+
+				[(#TEXTE|get_content_realisation)]
+
+				<div class='blue col-md-4'>
+					<div class='pj'>
+						<BOUCLE_lies(ARTICLES_LIES){id_article}{par rang}><BOUCLE_lie(ARTICLES){id_article=#ID_ARTICLE_LIE}><p><:voir_projet:> <a href='#URL_ARTICLE'>&laquo;&nbsp;#TITRE&nbsp;&raquo;</a></p></BOUCLE_lie></BOUCLE_lies>
+						<BOUCLE_documents(DOCUMENTS){id_article}{par date}{extension!="jpg"}{extension!="png"}>
+						<p>
+							<a href='#URL_DOCUMENT'>#TITRE ([(#EXTENSION|majuscules)], [(#TAILLE|taille_en_octets)])</a>
+						</p>
+						</BOUCLE_documents>
+					</div>
+				</div>
+				<div class='noir fiche_txt'>
+					[(#TEXTE|format_article{projet_bas})]
+				</div>
+		</div><!-- END ID DIAPORAMA -->
+	</div><!-- END COL-MD-9 -->
+</div>
+</BOUCLE_principale>
+[(#INCLURE{fond=404, erreur=<:aucun_article:>})]
+<//B_principale>

@@ -1,0 +1,26 @@
+[(#INCLURE{fond=inclure/header}{env})]
+			<div class='titre'>
+				<h1><:partenaires:></h1>
+			</div>
+			<div class='colonne'>
+				<div class='titre_partenaire'><h2><:institutions_partenaires:></h2></div>
+   			<BOUCLE_institutions(PARTENAIRES){type_id=0}{par date}>
+					<a href="#URL" class='partenaire'>
+						<img src="[(#LOGO_PARTENAIRE_NORMAL|extraire_attribut{src})]"/>
+						#NOM
+					</a>
+				[(#TOTAL_BOUCLE|div{2}|round{0}|>={#COMPTEUR_BOUCLE}|oui)[(#TOTAL_BOUCLE|moins{1}|div{2}|<{#COMPTEUR_BOUCLE}|oui)</div><div class='colonne col_part'><div class='titre_partenaire'>&nbsp;</div>]]
+			</BOUCLE_institutions>
+			</div>
+			<div class='colonne bleu'>
+				<div class='titre_partenaire'><h2><:laboratoires:></h2></div>
+   			<BOUCLE_laboratoires(PARTENAIRES){type_id=1}{par date}>
+					<a href="#URL" class='laboratoire'>
+						<b>#NOM</b>[(#LOCALITE|oui), #LOCALITE]
+					</a>
+				[(#TOTAL_BOUCLE|div{2}|round{0}|>={#COMPTEUR_BOUCLE}|oui)[(#TOTAL_BOUCLE|moins{1}|div{2}|<{#COMPTEUR_BOUCLE}|oui)</div><div class='colonne col_part bleu'><div class='titre_partenaire'>&nbsp;</div>]]
+			</BOUCLE_laboratoires>
+			</div>
+			
+
+[(#INCLURE{fond=inclure/footer}{share_url=#URL_ARTICLE}{share_titre=#TITRE})]

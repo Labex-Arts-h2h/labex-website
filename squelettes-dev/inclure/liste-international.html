@@ -1,0 +1,13 @@
+<B_articles>
+<div class="liste-internationals">
+	#ANCRE_PAGINATION
+	<secteur>
+		<BOUCLE_articles(ARTICLES){id_secteur=#ID_RUBRIQUE} {lang} {!par date} {pagination 100}>
+		[(#COMPTEUR_BOUCLE|alterner{'<div>','','','','','',''})]
+		#INCLURE{fond=inclure/items-international,id_article}
+		[(#COMPTEUR_BOUCLE|alterner{'','','','','','','</div>'})]
+		</BOUCLE_articles>
+	</secteur>
+	[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+</div>
+</B_articles>

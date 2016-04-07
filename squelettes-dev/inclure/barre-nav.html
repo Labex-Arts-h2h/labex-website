@@ -1,0 +1,42 @@
+<!-- SIDEBAR -->
+<nav class="col-xs-6 col-sm-3 col-md-2 hidden-xs" id="sidebar">
+    <div data-spy="affix" data-offset-top="60" data-offset-bottom="0" >
+    <a href="#URL_SITE_SPIP" id="logo">
+    [(#REM) <INCLURE{fond=inclure/logo,env}>]
+    <img src="#CHEMIN{img/logo.svg}" class="logo" alt="Accueil - Labex Arts-H2H">
+	</a>
+
+
+
+		<ul class="nav">
+
+			<li>
+				<a href="#URL_PAGE{presentation}" >
+					<multi>
+			            [fr] Présentation
+			            [en] Presentation
+      				</multi>
+				</a>
+			</li>			
+			<li><BOUCLE_projets(RUBRIQUES){id_rubrique=1}><a href='#URL_RUBRIQUE' [(#ENV{id_rubrique}|=={1}|?{"class='bleu'",""})]>#TITRE</a></BOUCLE_projets></li>
+
+			<li><BOUCLE_edition(RUBRIQUES){id_rubrique=59}><a href='#URL_RUBRIQUE' [(#ENV{id_rubrique}|=={59}|?{"class='bleu'",""})]>#TITRE</a></BOUCLE_edition></li>
+
+			<li><BOUCLE_realisations(RUBRIQUES){id_rubrique=26}><a href='#URL_RUBRIQUE' [(#ENV{id_rubrique}|=={26}|?{"class='bleu'",""})]>#TITRE</a></BOUCLE_realisations></li>
+
+			<li><BOUCLE_conf_hybrides(RUBRIQUES){id_rubrique=19}><a href='#URL_RUBRIQUE' [(#ENV{id_rubrique}|=={19}|?{"class='bleu'",""})]>#TITRE</a></BOUCLE_conf_hybrides></li>
+
+			<li><BOUCLE_international(RUBRIQUES){id_rubrique=43}><a href='#URL_RUBRIQUE' [(#ENV{id_rubrique}|=={43}|?{"class='bleu'",""})]>#TITRE</a></BOUCLE_international></li>
+			<li><BOUCLE_jeunes_chercheurs(RUBRIQUES){id_rubrique=62}><a href='#URL_RUBRIQUE' [(#ENV{id_rubrique}|=={62}|?{"class='bleu'",""})]>#TITRE</a></BOUCLE_jeunes_chercheurs></li>
+
+			<BOUCLE_chaires(ARTICLES){id_article=14}><B_chaires_trad><li><BOUCLE_chaires_trad(ARTICLES){page}{traduction}{lang=#ENV{lang}}><a href='#URL_ARTICLE' [(#ENV{id_article}|=={14}|?{"class='bleu'",""})]>#TITRE</a></BOUCLE_chaires_trad></li></B_chaires_trad></BOUCLE_chaires>
+        </ul> 
+    </div><!--/affix-->
+</nav>
+<!-- END SIDEBAR -->
+<div class="credit">
+	<span class='title-adress'>Université Paris 8</span><br>
+	2 Rue de la Liberté, 93526 Saint-Denis<br>
+	<hr>	
+	© Labex Arts-H2H | <a href="#URL_ARTICLE{16}"><:mentions:></a>
+</div>

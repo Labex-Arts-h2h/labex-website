@@ -1,0 +1,64 @@
+	<div class="row header-projet ">
+		<div class="col-sm-6 col-md-6">
+		<B_compte>
+			<h1>#TOTAL_BOUCLE projets</h1>	
+			<BOUCLE_compte(ARTICLES){id_rubrique IN 38,39}{tri date}{id_mot ?}{lang}>
+			</BOUCLE_compte>
+		</B_compte>
+			<h1>0 projet</h1>	
+		<//B_compte>
+		</div>
+<!-- 	<div class="col-md-1">
+		<ul class='filtre-expand'>
+			<li>
+			<a>Filtrer<img width="20" src='#CHEMIN{img/chevron-small-down.svg}'/></a>
+			</li>
+		</ul>
+	</div> -->
+
+<!-- 	<div class='filtrage'>
+		<ul>
+			<li><a onclick='$(".filtres").toggle();'>Filtrer par thématique <img width="20" src='#CHEMIN{img/chevron-small-down.svg}'/></a></li>
+		</ul>
+	</div> -->
+
+		<div class="col-sm-6 col-md-6 filtres">
+			<div class="filtre-btn">
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default dropdown-toggle btn-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  [(#ID_MOT!={''}|?{'Filtrer par thématique','Filtrer par thématique'})]
+
+				     <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu">
+				  		<li>
+				  			<a href="[(#SELF|parametre_url{id_mot, ''})]">Toutes</a>
+				  		</li>
+						<BOUCLE_thematiques(MOTS) {id_groupe=4} {par num titre, titre}>
+						<li>
+								<a class="ajax #EXPOSE" href="[(#SELF|parametre_url{id_mot, #ID_MOT})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
+						</li>
+						</BOUCLE_thematiques>
+				  </ul>
+				</div>
+				<!--  -->
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default dropdown-toggle btn-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    Filtrer par année <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu">
+				  		<li>
+				  			<a href="[(#SELF|parametre_url{id_mot, ''})]">Toutes</a>
+				  		</li>
+						<BOUCLE_annes(MOTS) {id_groupe=3} {par num titre, titre}>
+						<li>
+								<a class="ajax #EXPOSE" href="[(#SELF|parametre_url{id_mot, #ID_MOT})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
+						</li>
+						</BOUCLE_annes>
+				  </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<INCLURE{fond=inclure/liste-projets}{env}>

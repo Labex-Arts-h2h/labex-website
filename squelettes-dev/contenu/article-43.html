@@ -1,0 +1,28 @@
+<BOUCLE_principale(ARTICLES) {id_article}>
+	<div class='titre'>
+		<h1>#TITRE</h1>
+		[<div class='descriptif-profil'>(#DESCRIPTIF)</div>]
+	</div>
+	<div class='row'>
+
+		<div class="col-md-3">
+			<div class='pj blue'>
+				[(#CHAPO|oui)#CHAPO]
+				<BOUCLE_documents(DOCUMENTS){id_article}{par date}>
+				<p class='file'>
+					<a href='#URL_DOCUMENT'>#TITRE ([(#EXTENSION|majuscules)], [(#TAILLE|taille_en_octets)])</a>
+				</p>
+				</BOUCLE_documents>
+			</div>
+			<BOUCLE_logo(CONDITION){si #LOGO_ARTICLE_NORMAL|oui}>
+			[(#LOGO_ARTICLE_NORMAL|oui)<div class='colonne img'><img src="[(#LOGO_ARTICLE_NORMAL|image_passe_partout{160,160}|image_recadre{160,160}|extraire_attribut{src})]"/></div>]
+			</BOUCLE_logo>
+			<//B_logo>
+		</div>
+		[(#TEXTE|format_page)]
+	</div>
+</BOUCLE_principale>[(#INCLURE{fond=404, erreur=<:aucun_article:>})]
+<//B_principale>
+<script type="text/javascript">
+	$( 'a[href^="mailto:"]' ).parent().css({"border-top":"solid 1px black", 'padding-top':'5px'});
+</script>

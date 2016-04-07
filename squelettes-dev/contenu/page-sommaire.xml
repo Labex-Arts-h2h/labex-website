@@ -1,0 +1,6 @@
+<composition>
+	<nom>Page Accueil</nom>
+	<description>Gestion de la page d'accueil</description>
+	<icon>img/zpip-128.png</icon>
+	<branche type="page" composition="page-sommaire" />
+</composition>

@@ -1,0 +1,23 @@
+@font-face {
+	font-family: 'Caecilia';
+	src: url('fonts/CaeciliaLTStd-Bold.eot');
+	src: local('☺'), url('fonts/CaeciliaLTStd-Bold.woff') format('woff'), url('fonts/CaeciliaLTStd-Bold.ttf') format('truetype'), url('fonts/CaeciliaLTStd-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Caecilia';
+	src: url('fonts/CaeciliaLTStd-BoldItalic.eot');
+	src: local('☺'), url('fonts/CaeciliaLTStd-BoldItalic.woff') format('woff'), url('fonts/CaeciliaLTStd-BoldItalic.ttf') format('truetype'), url('fonts/CaeciliaLTStd-BoldItalic.svg') format('svg');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Caecilia Heavy';
+	src: url('fonts/CaeciliaLTStd-Heavy.eot');
+	src: local('☺'), url('fonts/CaeciliaLTStd-Heavy.woff') format('woff'), url('fonts/CaeciliaLTStd-Heavy.ttf') format('truetype'), url('fonts/CaeciliaLTStd-Heavy.svg') format('svg');
+	font-weight: normal;
+	font-weight: normal;
+}

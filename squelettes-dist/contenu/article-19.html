@@ -1,0 +1,71 @@
+<BOUCLE_principale(ARTICLES){id_article}>
+<div class="row projet">
+			<div class='col-md-4 head' >
+			<!-- 	<div data-spy="affix" data-offset-top="60" data-offset-bottom="0" class="affix"> -->
+				<h1>#TITRE</h1>
+				#DESCRIPTIF
+				#CS_SOMMAIRE
+				<B_partenaires>
+					<p><:partenaires_col:><br/>
+						<BOUCLE_partenaires(PARTENAIRES){id_article}{"<br/>"}>
+						<a href='#URL' target='_blank'>#NOM (#LOCALITE)</a>
+					</BOUCLE_partenaires></p>
+				</B_partenaires>
+				<!-- </div>-->
+ 			</div>
+			<div class='col-md-8 content'>
+			<BOUCLE_video(CONDITION){si #URL_SITE|oui}>
+				<div class='diaporama'><iframe width=537 height=316 src="#URL_SITE" frameborder="0" allowfullscreen></iframe></div>
+			</BOUCLE_video>
+				<B_diaporama>
+				<div class='diaporama'>
+				<BOUCLE_diaporama(DOCUMENTS){id_article}{par date}{extension IN "jpg","png"}>
+					<img src='#URL_DOCUMENT' class='img_[(#COMPTEUR_BOUCLE|moins{1})] img-responsive' [(#COMPTEUR_BOUCLE|=={1}|?{'','style="display:none;"'})]/>
+				</BOUCLE_diaporama>
+				<BOUCLE_control(CONDITION){si #_diaporama:TOTAL_BOUCLE|>{1}}>
+				<div class='fleches'>
+					<a class='left' onclick='diaporamaInc(-1);'>&nbsp;</a>
+					<a class='right' onclick='diaporamaInc(1);'>&nbsp;</a>
+				</div>
+				<div class='squares'><BOUCLE_diaporama2(DOCUMENTS){id_article}{par date}{extension IN "jpg","png"}>
+					<a [(#COMPTEUR_BOUCLE|=={1}|?{'class="selected"',''})] onclick='diaporamaGo([(#COMPTEUR_BOUCLE|moins{1})]);'>&nbsp;</a>
+				</BOUCLE_diaporama2></div>
+				</BOUCLE_control>
+				</div>
+				</B_diaporama>
+					<div class='empty_diaporama'></div>
+				<//B_diaporama>
+			<//B_video>
+
+			<div class='bleu fiche_txt row'>
+	
+				[(#TEXTE|format_article{projet_haut})]
+
+				<!-- PJ -->
+				<div class='colonne noir col-md-4'>
+					<div class='pj'>
+
+						<BOUCLE_lies(ARTICLES_LIES){id_article}{par rang}>
+							<BOUCLE_lie(ARTICLES){id_article=#ID_ARTICLE_LIE}>
+								              <BOUCLE_portfolio_unique(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{doublons}{0,1}>
+	                  [(#FICHIER|image_passe_partout{305,160}|image_recadre{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive logo})]
+	              				</BOUCLE_portfolio_unique>
+								<p><a href='#URL_ARTICLE'>#TITRE</a></p>
+							</BOUCLE_lie>
+						</BOUCLE_lies>
+	
+						<BOUCLE_documents(DOCUMENTS){id_article}{par date}{extension!="jpg"}{extension!="png"}>
+						<p class='file'>
+							<a href='#URL_DOCUMENT'>#TITRE ([(#EXTENSION|majuscules)], [(#TAILLE|taille_en_octets)])</a>
+						</p>
+						</BOUCLE_documents>
+					</div>
+				</div>
+				<!-- END PJ -->
+			</div>
+
+			<div class='bleu fiche_txt row'>[(#TEXTE|format_article{projet_bas})]</div>
+			</div>
+</div>
+</BOUCLE_principale>[(#INCLURE{fond=404, erreur=<:aucun_article:>})]
+<//B_principale>

@@ -1,0 +1,16 @@
+[(#REM)
+
+  Squelette Presentation d'une realisation
+  (c) 2009 Zpip
+  Distribue sous licence GPL
+
+]
+<BOUCLE_articles(ARTICLES) {id_article} {statut?}>
+<article class="realisation">
+	<h3 class="title-grid">
+		<a href="#URL_ARTICLE" rel="bookmark">[(#LOGO_ARTICLE_RUBRIQUE|image_passe_partout{160,240}|image_recadre{160,240})]
+		#TITRE</a>
+		</h3>
+	[<div class="#EDIT{intro} introduction entry-content">(#CHAPO)</div>]
+</article>
+</BOUCLE_articles>

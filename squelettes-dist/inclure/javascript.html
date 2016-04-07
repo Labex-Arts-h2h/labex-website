@@ -1,0 +1,18 @@
+
+
+<script>
+
+    $('#navbar-header').on('affix.bs.affix', function () {
+        $('.logo').addClass('logo-small');
+    });
+    $('#navbar-header').on('affixed-top.bs.affix', function () {
+        $('.logo').removeClass('logo-small');
+    });
+
+    // $('#sidebar').on('affix.bs.affix', function () {
+    //     $('#sidebar ul.nav').addClass('actif');
+    // });
+    // $('#sidebar').on('affixed-top.bs.affix', function () {
+    //     $('#sidebar ul.nav').removeClass('actif');
+    // });    
+</script>

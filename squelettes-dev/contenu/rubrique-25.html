@@ -1,0 +1,52 @@
+<!-- MEHDI !! Pas utilisé - pour tester le listage des rubriques -->
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+	<h1>#TITRE</h1>
+
+	<BOUCLE_newsletters(ARTICLES){id_rubrique}{par date}{inverse}{fusion YEAR(date)}>
+	
+	<section class="row newsletter">
+		<!-- ANNEES -->
+		<time class="col-md-3 col-sm-4" datetime="#DATE|annee">
+			[<span class="date_number">(#DATE|annee|substr{0,2})</span><br/>]
+			[<span class="date_number">(#DATE|annee|substr{2,4})</span>]
+		</time>
+		<!-- ANNEES -->
+
+		<div class="col-md-4 col-sm-6 newsletter_col">
+			<!-- NOUVELLE NEWSLETTER -->
+			<BOUCLE_liste_newsletters(NEWSLETTERS){annee_relatif}{par date}{inverse}>
+				<div class="mois">
+					[<a href="#URL_NEWSLETTER">(#DATE|affdate_jourcourt)</a>]
+				</div>
+			</BOUCLE_liste_newsletters>
+			<!-- END NOUVELLE NEWSLETTER -->
+
+			<!-- ANCIENNE NEWSLETTER -->
+			<BOUCLE_newsletter(ARTICLES){id_rubrique}{annee_relatif}
+			{par date}{inverse}>
+				<div class="mois">
+					[<a href="#URL_ARTICLE">(#TITRE)</a>]
+				</div>
+			</BOUCLE_newsletter>
+			<!-- END ANCIENNE NEWSLETTER -->
+		</div>
+
+
+
+		<BOUCLE_inscription(CONDITION){si #GET{inscription}|!={1}}>
+		#SET{inscription,1}
+		<div class='col-md-4 col-sm-12'>
+			<div class='pj'>
+				<p>
+					<:inscription_newsletter:> <span class='reverse'>artsh</span>2h@univ-paris8.fr
+				</p>
+			</div>
+		</div>
+		</BOUCLE_inscription>
+
+	</section>
+
+	</BOUCLE_newsletters>
+
+</BOUCLE_principale>[(#INCLURE{fond=404, erreur=<:aucune_rubrique:>})]
+<//B_principale>

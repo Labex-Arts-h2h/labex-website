@@ -1,0 +1,61 @@
+<B_principale>
+<BOUCLE_principale(ARTICLES) {id_article in 12,280,9,281}{lang=#ENV{lang}}>
+	<div class='titre'>
+		<h1>#TITRE</h1>
+		<p class="chapo">#CHAPO</p>
+	</div>
+	<div class='row height'>
+		[(#TEXTE|format_page)]
+		<div class='col-md-3 bleu no_print'>
+			<div class='pj'>
+				[(#DESCRIPTIF|oui)#DESCRIPTIF]
+				<BOUCLE_documents(DOCUMENTS){id_article}{par date}>
+				<p class='file'>
+					<a href='#URL_DOCUMENT'>#TITRE ([(#EXTENSION|majuscules)], [(#TAILLE|taille_en_octets)])</a>
+				</p>
+				</BOUCLE_documents>
+			</div>
+		</div>
+	</div>
+</BOUCLE_principale>
+</B_principale>
+<//B_principale>
+
+<div class="row">
+	<div class='titre' class="col-md-12">
+		<h1><:partenaires:></h1>
+	</div>
+	<div class="col-md-6">
+		<div class='titre_partenaire'>
+			<h2><:institutions_partenaires:></h2>
+		</div>
+		<ul>
+		<BOUCLE_institutions(PARTENAIRES){type_id=0}{par date}>
+		<li>
+			<a href="#URL" class='partenaire'>
+				<img src="[(#LOGO_PARTENAIRE_NORMAL|extraire_attribut{src})]"/>
+				#NOM
+			</a>
+		</li>
+		</BOUCLE_institutions>
+		</ul>
+	</div>
+
+	<div class="col-md-6">
+		<div class='titre_partenaire'><h2><:laboratoires:></h2></div>
+		<ul>
+		<BOUCLE_laboratoires(PARTENAIRES){type_id=1}{par date}>
+		<li>
+			<a href="#URL" class='laboratoire'>
+				<b>#NOM</b>[(#LOCALITE|oui), #LOCALITE]
+			</a>
+		</li>
+		</BOUCLE_laboratoires>
+		</ul>
+	</div>
+
+</div>
+
+
+
+

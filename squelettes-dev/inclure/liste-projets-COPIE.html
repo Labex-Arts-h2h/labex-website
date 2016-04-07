@@ -1,0 +1,62 @@
+
+#SET{lang,#ENV|get_lang}
+<B1>
+<div class="row">
+	<div class='tri-projets'>
+		<ul>
+			<li>#TRI{date,'Trier par date'}</li>
+			<li>#TRI{titre,'Trier par titre'}</li>
+		</ul>
+		<ul class="vues">
+			<li>
+				<a id="vue-simple" href="#">
+					<img alt="vue simple" width="12" src="#CHEMIN{/img/svg/si-glyph-bullet-list-2.svg}"/>
+				</a>
+			</li>
+			<li>
+				<a id="vue-complexe" href="#">
+					
+					<img alt="vue complexe" width="12" src="#CHEMIN{/img/svg/si-glyph-square-four.svg}"/>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="col-md-4" style="float:right;">
+
+		[(#FORMULAIRE_RECHERCHE|spip.php?page=recherche-projet)]
+	</div>
+
+</div>
+
+<div class="row">
+
+<div class='liste-projets'>
+   <BOUCLE1(ARTICLES){id_rubrique IN 38,39}{tri date}{id_mot ?}{lang}{0,84}>[(#COMPTEUR_BOUCLE|alterner{'<div class="row">','','',''})]
+	   		<article class="col-md-3">
+	   			<BOUCLE_mots(MOTS){id_article}{id_groupe=4}>
+	   			<span class="tag">#TITRE</span>
+	   			</BOUCLE_mots>
+				<B_portfolio_unique>
+	              <BOUCLE_portfolio_unique(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{doublons}{0,1}>
+	                  [(#FICHIER|image_passe_partout{305,160}|image_recadre{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive logo})]
+	              </BOUCLE_portfolio_unique>
+	              </B_portfolio_unique>
+	              	[(#LOGO_RUBRIQUE|image_passe_partout{305,160}|image_recadre{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive}|inserer_attribut{class,img-responsive logo})]
+	              <//B_portfolio_unique>
+
+	            <h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+    			<p class="descriptif">[(#CHAPO|?{[(#CHAPO|textebrut)], "&nbsp;"})]</p>
+	   		</article>
+	[(#COMPTEUR_BOUCLE|alterner{'','','','</div>'})]
+   </BOUCLE1>
+[(#TOTAL_BOUCLE|alterner{
+    '<article class="col-md-4"></article><article class="col-md-4"></article></div>','<article class="col-md-4"></article></div>', ''})]
+</div>
+
+</B1>
+ 	Aucun Projet.
+<//B1>
+
+</div>
+

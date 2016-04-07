@@ -1,0 +1,19 @@
+<B_articles>
+<div>
+	#ANCRE_PAGINATION
+	<secteur>
+		<BOUCLE_articles(ARTICLES){id_secteur=#ID_RUBRIQUE} {lang} {!par date} {pagination 100}>
+			<article class='row'>
+				<a href='#URL_ARTICLE'>
+				<div class='col-md-3'>
+				[(#LOGO_ARTICLE|image_passe_partout{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive})]
+				</div>
+				<h2 class="col-md-3 title-editions">#TITRE</h2>
+				<div class='descriptif col-md-6'>#DESCRIPTIF</div>
+				</a>
+			</article>
+		</BOUCLE_articles>
+	</secteur>
+	[<p class="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+</div>
+</B_articles>

@@ -1,0 +1,17 @@
+<article class="projet">
+	<BOUCLE_mots(MOTS){id_article}{id_groupe=4}>
+	<div class="tag">#TITRE</div>
+	</BOUCLE_mots>
+    <h3>
+    <a href="#URL_ARTICLE">
+    <B_portfolio_unique>
+      <BOUCLE_portfolio_unique(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{doublons}{0,1}>
+          [(#FICHIER|image_passe_partout{305,160}|image_recadre{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive})]
+      </BOUCLE_portfolio_unique>
+      </B_portfolio_unique>
+      	[(#LOGO_RUBRIQUE|image_passe_partout{305,160}|image_recadre{305,160}|inserer_attribut{alt,'#TITRE'}|inserer_attribut{class,img-responsive})]
+      <//B_portfolio_unique>
+    #TITRE
+    </a></h3>
+	<p class="descriptif">[(#CHAPO|?{[(#CHAPO|textebrut)], "&nbsp;"})]</p>
+</article>

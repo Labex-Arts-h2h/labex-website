@@ -1,0 +1,126 @@
+<!-- TOP NAVBAR -->
+
+<nav id="navbar-header" class="navbar navbar-collapse collapse hidden-xs" data-spy="affix" data-offset-top="65" data-offset-bottom="0">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+            
+                <li>
+                    <BOUCLE_newsletter(RUBRIQUES){id_rubrique=25}>
+                        <a href='#URL_RUBRIQUE' [(#ENV{id_rubrique}|=={25}|?{"class='bleu'",""})]>
+                        <img width="12" src="#CHEMIN{/img/svg/si-glyph-mail.svg}"/>
+<!--                         <svg class="svg-icon" viewBox="0 0 20 20">
+                            <path d="M17.388,4.751H2.613c-0.213,0-0.389,0.175-0.389,0.389v9.72c0,0.216,0.175,0.389,0.389,0.389h14.775c0.214,0,0.389-0.173,0.389-0.389v-9.72C17.776,4.926,17.602,4.751,17.388,4.751 M16.448,5.53L10,11.984L3.552,5.53H16.448zM3.002,6.081l3.921,3.925l-3.921,3.925V6.081z M3.56,14.471l3.914-3.916l2.253,2.253c0.153,0.153,0.395,0.153,0.548,0l2.253-2.253l3.913,3.916H3.56z M16.999,13.931l-3.921-3.925l3.921-3.925V13.931z"></path>
+                        </svg> -->
+                        &nbsp;#TITRE</a>
+
+                    </BOUCLE_newsletter>
+                </li>
+
+                <li><BOUCLE_calendrier(RUBRIQUES){id_rubrique=2}><a href='#URL_RUBRIQUE' [(#ENV{id_rubrique}|=={2}|?{"class='bleu'",""})]><img width="12" src="#CHEMIN{/img/svg/si-glyph-calendar-empty.svg}"/>&nbsp;#TITRE</a></BOUCLE_calendrier></li>
+
+                <li>
+                    <BOUCLE_equipe(ARTICLES){id_article=15}>
+                        <a  href="#URL_ARTICLE{15}" [(#ENV{id_article}|=={15}|?{"class='bleu'",""})]><img width="12" src="#CHEMIN{/img/svg/si-glyph-person-public.svg}"/>&nbsp;#TITRE</a>
+                    </BOUCLE_equipe>                    
+                </li>
+
+                <li>
+                    <a href="#URL_LOGIN"><img width="12" src="#CHEMIN{/img/svg/si-glyph-key.svg}"/>&nbsp;<:acces_reserve:></a>
+                </li>
+                <li style="background-color:rgba(0,156,196,0.6);">
+                    <button id="search-magnifier"><img width="12" src="#CHEMIN{/img/svg/si-glyph-magnifier.svg}"/>&nbsp;</button>
+                </li>
+
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
+</nav>
+<!-- END TOP NAVBAR -->
+
+
+<div id="search-fullscreen" class="container overlay overlay-scale">
+<button type="button" class="overlay-close">Close</button>
+[(#FORMULAIRE_RECHERCHE_FULL)]
+<!-- 
+<div class="row">
+    <div class="col-md-3">Récent</div>
+    <div class="col-md-3">Populaire</div>
+    <div class="col-md-3"></div>
+</div>
+ -->
+</div>
+
+<script>
+
+    document.addEventListener( 'keydown', function( ev ) {
+        isOpen = true;
+        var keyCode = ev.keyCode || ev.which;
+        if( keyCode === 27 && isOpen ) {
+            // toggleSearch(ev);
+            $("#search-fullscreen").css("display","none");
+        }
+    } );
+
+    (function() {
+    var triggerBttn = document.getElementById( 'search-magnifier' ),
+        overlay = document.querySelector( 'div.overlay' ),
+        closeBttn = overlay.querySelector( 'button.overlay-close' );
+        transEndEventNames = {
+            'WebkitTransition': 'webkitTransitionEnd',
+            'MozTransition': 'transitionend',
+            'OTransition': 'oTransitionEnd',
+            'msTransition': 'MSTransitionEnd',
+            'transition': 'transitionend'
+        },
+        transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
+        support = { transitions : Modernizr.csstransitions };
+
+    function toggleOverlay() {
+        if( classie.has( overlay, 'open' ) ) {
+            classie.remove( overlay, 'open' );
+            classie.add( overlay, 'close' );
+            var onEndTransitionFn = function( ev ) {
+                if( support.transitions ) {
+                    if( ev.propertyName !== 'visibility' ) return;
+                    this.removeEventListener( transEndEventName, onEndTransitionFn );
+                }
+                classie.remove( overlay, 'close' );
+            };
+            if( support.transitions ) {
+                overlay.addEventListener( transEndEventName, onEndTransitionFn );
+            }
+            else {
+                onEndTransitionFn();
+            }
+        }
+        else if( !classie.has( overlay, 'close' ) ) {
+            classie.add( overlay, 'open' );
+        }
+    }
+
+    triggerBttn.addEventListener( 'click', toggleOverlay );
+    closeBttn.addEventListener( 'click', toggleOverlay );
+
+    document.addEventListener( 'keydown', function( ev ) {
+        isOpen = true;
+        var keyCode = ev.keyCode || ev.which;
+        if( keyCode === 27 && isOpen ) {
+            toggleOverlay(ev);
+        }
+    });
+
+})();
+</script>
+

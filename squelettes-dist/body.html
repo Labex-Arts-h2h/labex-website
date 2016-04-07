@@ -1,0 +1,35 @@
+<!-- HEADER LANGUE -->
+<div class="container lang-header">
+	<div style='width:100px;float:right;'>
+	#MENU_LANG
+	</div>
+</div>
+<!-- HEADER LANGUE -->
+
+<div class="page-container">
+	<INCLURE{fond=inclure/entete,env}>
+	<div class="container wrapper">
+	    <div class="row content">
+			
+			<INCLURE{fond=navigation/#ENV{type},env}>
+
+	        <!-- MAIN AREA -->
+	        <div id="main" class="col-xs-12 col-sm-9 col-md-10">
+				<INCLURE{fond=contenu/#ENV{type},env}>
+				<footer class="row">
+					<INCLURE{fond=inclure/pied,env}>
+				</footer>
+	        </div>
+	        <!-- END MAIN AREA -->
+       	</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/javascript,env}>
+
+
+[(#REM)
+<div id="navigation">
+	<INCLURE{fond=navigation/#ENV{type},env}>
+	<INCLURE{fond=extra/#ENV{type},env}>
+</div>
+]

@@ -1,0 +1,8 @@
+<div class="row  formulaire_recherche_full[ (#ENV{class})]" id="formulaire_recherche ">
+<form action="spip.php?page=recherche-full" method="get" class=" col-lg-9 col-lg-offset-1"><div>
+	[(#ENV{action}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<input type="[(#HTML5|?{search,text})]" class="search text" size="10" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off" placeholder="<:type:>"
+	/><input type="submit" class="submit" value="<:cherche:>" title="<:info_rechercher:>" />
+</div></form>
+</div>
